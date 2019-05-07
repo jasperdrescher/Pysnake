@@ -46,6 +46,9 @@ class snake(object):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
 
             keys = pygame.key.get_pressed()
 
@@ -69,10 +72,6 @@ class snake(object):
                     self.dirnx = 0
                     self.dirny = 1
                     self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
-
-                # TODO: move input handling
-                elif keys[pygame.K_ESCAPE]:
-                    pygame.event += pygame.QUIT
 
         for i, c in enumerate(self.body):
             p = c.pos[:]
@@ -115,7 +114,7 @@ class snake(object):
 
     def draw(self, surface):
         for i, c in enumerate(self.body):
-            if i ==0:
+            if i == 0:
                 c.draw(surface, True)
             else:
                 c.draw(surface)
