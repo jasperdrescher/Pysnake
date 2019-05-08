@@ -7,7 +7,7 @@ from tkinter import messagebox
 class cube(object):
     rows = 20
     width = 500
-    def __init__(self, start, dirnx = 1, dirny = 0, color=(255, 0, 0)):
+    def __init__(self, start, dirnx = 1, dirny = 0, color=(0, 255, 0)):
         self.pos = start
         self.dirnx = 1
         self.dirny = 0
@@ -27,10 +27,10 @@ class cube(object):
         if eyes:
             centre = dis//2
             radius = 3
-            circleMiddle = (i * dis + centre - radius, j * dis + 8)
-            circleMiddle2 = (i * dis + dis - radius * 2, j * dis + 8)
-            pygame.draw.circle(surface, (0,0,0), circleMiddle, radius)
-            pygame.draw.circle(surface, (0,0,0), circleMiddle2, radius)
+            leftEye = (i * dis + centre - radius, j * dis + 8)
+            rightEye = (i * dis + dis - radius * 2, j * dis + 8)
+            pygame.draw.circle(surface, (0, 0, 0), leftEye, radius)
+            pygame.draw.circle(surface, (0, 0, 0), rightEye, radius)
 
 class snake(object):
     body = []
@@ -155,8 +155,8 @@ def main():
     rows = 20
     win = pygame.display.set_mode((width, height))
     pygame.display.set_caption("Pysnake")
-    s = snake((255 , 0, 0), (10, 10))
-    snack = cube(randomSnack(rows, s), color = (0, 255, 0))
+    s = snake((0 , 255, 0), (10, 10))
+    snack = cube(randomSnack(rows, s), color = (255, 0, 0))
     flag = True
 
     clock = pygame.time.Clock()
@@ -167,7 +167,7 @@ def main():
         s.move()
         if s.body[0].pos == snack.pos:
             s.addCube()
-            snack = cube(randomSnack(rows, s), color = (0, 255, 0))
+            snack = cube(randomSnack(rows, s), color = (255, 0, 0))
 
         for x in range(len(s.body)):
             if s.body[x].pos in list(map(lambda z:z.pos, s.body[x+1:])):
